@@ -1,0 +1,22 @@
+{% extends 'app/layout.html' %}
+{% block body %}
+<h1>Dostupne autobuske stanice</h1>
+    <li>Naziv: {{stanica.naziv}} - Opis: {{stanica.opis}} - Lokacija: ({{stanica.duzina}}, {{stanica.sirina}})</li>
+    {% endfor %}
+</ul>
+<table>
+    <tr>
+        <th>Naziv</th>
+        <th>Opis</th>
+        <th>Lokacija</th>
+    </tr>
+    {% for stanica in lista_stanica %}
+        <tr>    
+            <td>{{stanica.naziv}}</td>  
+            <td>{{stanica.opis}}</td>
+            <td>{{stanica.duzina}}, {{stanica.sirina}}</td>
+        </tr>        
+    {% endfor %}
+
+</table>
+{% endblock %}
