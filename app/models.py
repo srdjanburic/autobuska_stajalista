@@ -11,6 +11,20 @@ class Stanica(models.Model):
         return f"Naziv: {self.naziv}, Opis: {self.opis}, Pozicija: ({self.tacka})"
 
     def get_absolute_url(self):
-        return reverse('stanice')
+        return reverse('app:stanice')
 
+class Linija(models.Model):
+    naziv=models.CharField(max_length=200)
+    broj_stanica = models.IntegerField(default=0)
+    
+
+    stanice = models.ManyToManyField(Stanica) 
+
+    def __str__ (self):
+        return f"{self.naziv} {self.broj_stanica}"
+
+    def get_absolute_url(self):
+        return reverse('app:linije')
+
+    
 

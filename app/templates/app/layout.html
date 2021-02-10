@@ -7,6 +7,12 @@
     <title>Autobus</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'app:stanice' %}">Autobuske stanice</a></li>
+            <li><a href="{% url 'app:linije' %}">Autobuske linije</a></li>
+        </ul>
+    </nav>
     {% block body %}
     {% endblock %}
 </body>
