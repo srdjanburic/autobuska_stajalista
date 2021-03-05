@@ -1,0 +1,21 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+
+{% block body %}
+    <form method="POST">
+        {% csrf_token %}
+        {% if stanice.all.count < 3  %}
+        <a href="{% url 'app:dodaj_stanicu' %}" role="button">Dodaj najmanje 3 stanice</a>
+        {% else %}
+
+        {{ form.as_p }}
+        {% endif %}
+        <input type="submit" class="btn btn-primary w-100" id="sacuvaj" value="Sacuvaj liniju" disabled="true">
+    </form>
+    <script src="{% static 'app/index.js' %}"> 
+		
+	</script> 
+    {% endblock %}
+    
+    

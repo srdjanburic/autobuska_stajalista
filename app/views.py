@@ -1,14 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
+from .forms import LinijaModelForm, StanicaModelForm
+
 
 from .models import Stanica, Linija
-# Create your views here.
+
+class PocetnaView(generic.TemplateView):
+    template_name = 'app/pocetna.html'
 
 class DodajStanicuView(generic.CreateView):
     template_name = 'app/dodaj_stanicu.html'
-    model = Stanica
-    fields = '__all__'
+    form_class = StanicaModelForm    
 
 class StaniceView(generic.ListView):
     template_name = 'app/stanice.html'
@@ -16,9 +19,8 @@ class StaniceView(generic.ListView):
     context_object_name = 'lista_stanica'
 
 class DodajLinijuView(generic.CreateView):
-    template_name = 'app/dodaj_liniju.html'
-    model = Linija
-    fields = ['naziv', 'stanice']
+    template_name = 'app/dodaj_liniju.html'    
+    form_class = LinijaModelForm
 
 class LinijeView(generic.ListView):
     template_name = 'app/linije.html'

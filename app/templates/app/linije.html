@@ -1,0 +1,37 @@
+
+{% extends 'app/layout.html' %}
+
+{% block body %}
+<h1>Dostupne autobuske linije</h1>
+
+    
+{% if lista_linija %}
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Naziv</th>
+        <th>Stanice</th>
+     
+    </tr>
+    {% for linija in lista_linija %}
+        <tr>    
+            <td>{{ linija.naziv }}</td>  
+          
+            <td>
+                
+                {% for stanica in linija.stanice.all %}
+                {{ stanica.naziv }}    
+                {% if stanica != linija.stanice.last %}
+                     ->
+                    {%endif%}
+                {% endfor %}                
+            </td>          
+        </tr>        
+    {% endfor %}
+</table>
+{% else %}
+<strong>Nema dostupnih linija</strong>
+{% endif %}
+<br>
+<a class="btn btn-primary w-100" href="{% url 'app:dodaj_liniju' %}">Dodaj autobusku liniju</a>
+{% endblock %}

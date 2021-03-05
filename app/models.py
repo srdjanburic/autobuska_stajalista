@@ -1,4 +1,6 @@
 from django.db import models
+from django.forms import ModelForm
+from django.core.exceptions import ValidationError
 from django.shortcuts import reverse
 
 
@@ -8,23 +10,20 @@ class Stanica(models.Model):
     tacka = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"Naziv: {self.naziv}, Opis: {self.opis}, Pozicija: ({self.tacka})"
+        return f"{self.naziv}"
 
     def get_absolute_url(self):
         return reverse('app:stanice')
 
 class Linija(models.Model):
     naziv=models.CharField(max_length=200)
-    broj_stanica = models.IntegerField(default=0)
+  
     
-
-    stanice = models.ManyToManyField(Stanica) 
-
+    stanice = models.ManyToManyField(Stanica, related_name='stanica')
+    
     def __str__ (self):
-        return f"{self.naziv} {self.broj_stanica}"
+        return f"{self.naziv}"
 
     def get_absolute_url(self):
         return reverse('app:linije')
-
-    
 
