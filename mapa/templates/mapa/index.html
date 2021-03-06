@@ -1,0 +1,31 @@
+
+
+    {% extends 'app/layout.html' %}
+    {% load static %}
+
+    {% block body %}
+    <div class="grid-container">
+        
+        
+        <div class="grid-2">
+            
+            <div id="js-map" class="map"></div>
+        </div>
+        
+    </div>  
+    <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+    </div>
+    <div style="background-color: blue;">
+  
+</div>  
+    <script>
+       fetch('{% url "mapa:stanice" %}')
+       .then(res => res.json())
+       .then(data => console.log(data))
+       .catch(err => console.log(err))
+
+    </script>
+    <script src="{% static 'mapa/main.js' %}"></script>
+{% endblock %}
