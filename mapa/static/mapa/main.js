@@ -14,25 +14,25 @@
     })
     map.addLayer(openStreetMapStandard)
 
-    // map.addEventListener('click', function(e){
-    //     console.log(e.coordinate)
-    // })
+    map.addEventListener('click', function(e){
+        console.log(e.coordinate)
+    })
 
 
  
     //prikaz izabranih tacaka
-    // map.addEventListener('click', function(e){
-    //     var layer = new ol.layer.Vector({
-    //         source: new ol.source.Vector({
-    //             features: [
-    //                 new ol.Feature({
-    //                     geometry: new ol.geom.Point(e.coordinate)
-    //                 })
-    //             ]
-    //         })
-    //     })
-    //     map.addLayer(layer)
-    // })
+    map.addEventListener('click', function(e){
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [
+                    new ol.Feature({
+                        geometry: new ol.geom.Point(e.coordinate)
+                    })
+                ]
+            })
+        })
+        map.addLayer(layer)
+    })
   
 // Prikaz stanica iz baze
 async function prikaziStanice(url){
