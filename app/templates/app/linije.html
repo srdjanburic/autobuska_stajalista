@@ -20,9 +20,9 @@
             <td>
                 
                 {% for stanica in linija.stanice.all %}
-                {{ stanica.naziv }}    
+               <a href="{% url 'mapa:linija' %}"> {{ stanica.naziv }} </a>   
                 {% if stanica != linija.stanice.last %}
-                     ->
+                    ,
                     {%endif%}
                 {% endfor %}                
             </td>          
