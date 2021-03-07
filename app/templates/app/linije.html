@@ -15,12 +15,12 @@
     </tr>
     {% for linija in lista_linija %}
         <tr>    
-            <td>{{ linija.naziv }}</td>  
+             <td><a href="{% url 'mapa:prikaz_linije' pk=linija.pk %}">{{ linija.naziv }}</a></td>  
           
             <td>
                 
                 {% for stanica in linija.stanice.all %}
-               <a href="{% url 'mapa:linija' %}"> {{ stanica.naziv }} </a>   
+               {{ stanica.naziv }}  
                 {% if stanica != linija.stanice.last %}
                     ,
                     {%endif%}

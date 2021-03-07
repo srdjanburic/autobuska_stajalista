@@ -1,0 +1,31 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block body %}
+<h1>{{linija.naziv}}</h1>
+<div class="grid-container">
+    
+    
+    <div class="grid-2">
+        
+        <div id="js-map" class="map"></div>
+    </div>
+    
+</div>  
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+</div>
+<div class="overlay-container">
+    <span class="overlay-text" id="feature-name"></span><br>
+    <span class="overlay-text" id="feature-additional-info"></span><br>
+
+</div>
+<script src="{% static 'mapa/main.js' %}"></script>
+<script>
+    
+  prikaziStanice('{% url "mapa:linija" pk %}')
+   
+    
+</script>
+{% endblock %}
