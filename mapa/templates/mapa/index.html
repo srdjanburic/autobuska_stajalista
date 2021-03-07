@@ -17,15 +17,16 @@
         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
         <div id="popup-content"></div>
     </div>
-    <div style="background-color: blue;">
-  
-</div>  
-    <script>
-       fetch('{% url "mapa:stanice" %}')
-       .then(res => res.json())
-       .then(data => console.log(data))
-       .catch(err => console.log(err))
+    <div class="overlay-container">
+        <span class="overlay-text" id="feature-name"></span><br>
+        <span class="overlay-text" id="feature-additional-info"></span><br>
 
-    </script>
+    </div>
     <script src="{% static 'mapa/main.js' %}"></script>
+    <script>
+        
+      prikaziStanice('{% url "mapa:stanice" %}')
+       
+        
+    </script>
 {% endblock %}

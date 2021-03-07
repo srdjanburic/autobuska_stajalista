@@ -14,102 +14,90 @@
     })
     map.addLayer(openStreetMapStandard)
 
-    map.addEventListener('click', function(e){
-        console.log(e.coordinate)
-    })
+    // map.addEventListener('click', function(e){
+    //     console.log(e.coordinate)
+    // })
 
-    var layer = new ol.layer.Vector({
-        source: new ol.source.Vector({
-            features: [
-                new ol.Feature({
-                    geometry: new ol.geom.Point([1914531.2339354588, 5586893.354533319])
-                })
-            ]
-        })
-    });
-    map.addLayer(layer);
 
-    map.addEventListener('click', function(e){
-        var layer = new ol.layer.Vector({
-            source: new ol.source.Vector({
-                features: [
-                    new ol.Feature({
-                        geometry: new ol.geom.Point(e.coordinate)
-                    })
-                ]
-            })
-        })
-        map.addLayer(layer)
-    })
+ 
+    //prikaz izabranih tacaka
+    // map.addEventListener('click', function(e){
+    //     var layer = new ol.layer.Vector({
+    //         source: new ol.source.Vector({
+    //             features: [
+    //                 new ol.Feature({
+    //                     geometry: new ol.geom.Point(e.coordinate)
+    //                 })
+    //             ]
+    //         })
+    //     })
+    //     map.addLayer(layer)
+    // })
   
 // Prikaz stanica iz baze
+async function prikaziStanice(url){
+    const response = await fetch(url)
+    const data = await response.json()
+    
+    let pom = []
+    for(let i = 0; i <data.length; i++){
+       
+        pom.push(new ol.Feature({
+            geometry: new ol.geom.Point(data[i].fields.tacka.split(',').map(Number)),
+            naziv: data[i].fields.naziv,
+            opis: data[i].fields.opis
+        }))
+    }
+    const strokeStyle = new ol.style.Stroke({
+        color: [46,45,45,1],
+        width: 1.2
+    })
 
-  
+    const cicleStyle = new ol.style.Circle({
+        fill: new ol.style.Fill({
+            color: [245,45,5,1]
+        }),
+        radius: 7,
+        stroke: strokeStyle
 
-//     var attribution = new ol.control.Attribution({
-//         collapsible: false
-//     });
-   
-//     var map = new ol.Map({
-//      //  controls: ol.control.defaults({attribution: false}).extend([attribution]), 
-//         layers: [
-//             new ol.layer.Tile({
-//                 source: new ol.source.OSM({
-//                     url: 'https://tile.openstreetmap.be/osmbe/{z}/{x}/{y}.png',
-//                     attributions: [ ol.source.OSM.ATTRIBUTION, 'Tiles courtesy of <a href="https://geo6.be/">GEO-6</a>' ],
-//                     maxZoom: 18
-//                 })
-//             })
-//         ],
-//         target: 'js-map',
-//         view: new ol.View({
-//             center: ol.proj.fromLonLat([4.35247, 50.84673]),
-//             maxZoom: 18,
-//             zoom: 12
-//         })
-//     });
-//     var layer = new ol.layer.Vector({
-//         source: new ol.source.Vector({
-//             features: [
-//                 new ol.Feature({
-//                     geometry: new ol.geom.Point(ol.proj.fromLonLat([4.35247, 50.84673]))
-//                 })
-//             ]
-//         })
-//     });
-//   //  map.addLayer(layer);
+    })
+    var layer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: pom
+        }),
+        style: new ol.style.Style({
+            image:cicleStyle
+        })
+    })
+    map.addLayer(layer)
 
-//     var container = document.getElementById('popup');
-//     var content = document.getElementById('popup-content');
-//     var closer = document.getElementById('popup-closer');
-   
-//     var overlay = new ol.Overlay({
-//         element: container,
-//         autoPan: true,
-//         autoPanAnimation: {
-//             duration: 250
-//         }
-//     });
-//     map.addOverlay(overlay);
-   
-//     closer.onclick = function() {
-//         overlay.setPosition(undefined);
-//         closer.blur();
-//         return false;
-//     };
-//     map.on('singleclick', function (event) {
-//         if (map.hasFeatureAtPixel(event.pixel) === true) {
-//             var coordinate = event.coordinate;
-   
-//             content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
-//             overlay.setPosition(coordinate);
-//         } else {
-//             overlay.setPosition(undefined);
-//             closer.blur();
-//         }
-//     });
+    //Vectore feature pop-up logic
+    const overlayContainerElement = document.querySelector('.overlay-container')
+    const overlayLayer = new ol.Overlay({
+        element: overlayContainerElement
+    })
 
-   
+    map.addOverlay(overlayLayer)
+
+    const overlayFeatureName = document.getElementById('feature-name')
+    const overlayFeatureAdditionalInfo = document.getElementById('feature-additional-info')
+
+
+    map.on('click', function(e){
+        overlayLayer.setPosition(undefined)
+        map.forEachFeatureAtPixel(e.pixel,function(feature, layer){
+            let clickedCoordinate = e.coordinate
+            let ime = feature.get('naziv')
+            let opis = feature.get('opis')
+            overlayLayer.setPosition(clickedCoordinate)
+            overlayFeatureName.innerHTML = ime
+            overlayFeatureAdditionalInfo.innerHTML = opis
+        })
+    })
+}
+
+
+
 
     
 
