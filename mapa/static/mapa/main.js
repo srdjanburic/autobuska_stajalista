@@ -1,3 +1,7 @@
+const id_tacka = document.getElementById('id_tacka')
+const dodajStanicuButton = document.getElementById('dodaj_stanicu')
+
+
 
     const map = new ol.Map({
         view: new ol.View({
@@ -14,15 +18,14 @@
     })
     map.addLayer(openStreetMapStandard)
 
-    map.addEventListener('click', function(e){
-        console.log(e.coordinate)
-    })
+  
 
 
  
     //prikaz izabranih tacaka
-    map.addEventListener('click', function(e){
-        var layer = new ol.layer.Vector({
+  map.addEventListener('click', function(e){
+        
+        let layer1 = new ol.layer.Vector({
             source: new ol.source.Vector({
                 features: [
                     new ol.Feature({
@@ -31,8 +34,22 @@
                 ]
             })
         })
-        map.addLayer(layer)
+        map.addLayer(layer1)
+    })  
+// //Dodavanje nove stanice
+function dodajStanicu(){
+    id_tacka.readOnly = true
+    dodajStanicuButton.hidden = true
+    alert('Izaberi poziciju na mapi')
+    map.addEventListener('click', function(e){
+        console.log('srdjan')
+        const forma = document.querySelector('#forma')
+        forma.hidden = false
+        let clickedCoordinate = e.coordinate
+        id_tacka.value = clickedCoordinate.toString()   
+        console.log(clickedCoordinate)        
     })
+}
   
 // Prikaz stanica iz baze
 async function prikaziStanice(url){

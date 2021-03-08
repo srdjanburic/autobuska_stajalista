@@ -4,15 +4,23 @@
     {% load static %}
 
     {% block body %}
-    <div class="grid-container">
+    
         
         
-        <div class="grid-2">
+        
             
             <div id="js-map" class="map"></div>
+            <button id="dodaj_stanicu" class="btn btn-primary w-auto mt-3 ">Izaberi stanicu na mapi</button>
+       
+        <div id="forma" hidden="true" >
+            <form  action="" method="post">
+                {% csrf_token %} 
+                {{ form.as_p }}
+                <input type="submit" value="Sacuvaj">
+            </form>
         </div>
         
-    </div>  
+    
     <div id="popup" class="ol-popup">
         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
         <div id="popup-content"></div>
@@ -22,11 +30,12 @@
         <span class="overlay-text" id="feature-additional-info"></span><br>
 
     </div>
+    
     <script src="{% static 'mapa/main.js' %}"></script>
     <script>
         
       prikaziStanice('{% url "mapa:stanice" %}')
-       
-        
+      document.getElementById('dodaj_stanicu').onclick = dodajStanicu 
+      
     </script>
 {% endblock %}

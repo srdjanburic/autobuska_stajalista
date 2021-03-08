@@ -15,7 +15,7 @@
     </tr>
     {% for linija in lista_linija %}
         <tr>    
-             <td><a href="{% url 'mapa:prikaz_linije' pk=linija.pk %}">{{ linija.naziv }}</a></td>  
+             <td data-togle="tooltip" data-placement="top" title="Prikazi na mapi"><a href="{% url 'mapa:prikaz_linije' pk=linija.pk %}">{{ linija.naziv }}</a></td>  
           
             <td>
                 
