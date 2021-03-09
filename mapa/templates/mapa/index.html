@@ -10,7 +10,7 @@
         
             
             <div id="js-map" class="map"></div>
-            <button id="dodaj_stanicu" class="btn btn-primary w-auto mt-3 ">Izaberi stanicu na mapi</button>
+            <button id="dodaj_stanicu" class="btn btn-primary w-auto mt-3 ">Dodaj stanicu na mapi</button>
        
         <div id="forma" hidden="true" >
             <form  action="" method="post">
@@ -34,7 +34,7 @@
     <script src="{% static 'mapa/main.js' %}"></script>
     <script>
         
-      prikaziStanice('{% url "mapa:stanice" %}')
+      prikaziStanice('{% url "api:stanice" %}')
       document.getElementById('dodaj_stanicu').onclick = dodajStanicu 
       
     </script>

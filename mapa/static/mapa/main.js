@@ -18,36 +18,19 @@ const dodajStanicuButton = document.getElementById('dodaj_stanicu')
     })
     map.addLayer(openStreetMapStandard)
 
-  
-
-
- 
-    //prikaz izabranih tacaka
-  map.addEventListener('click', function(e){
-        
-        let layer1 = new ol.layer.Vector({
-            source: new ol.source.Vector({
-                features: [
-                    new ol.Feature({
-                        geometry: new ol.geom.Point(e.coordinate)
-                    })
-                ]
-            })
-        })
-        map.addLayer(layer1)
-    })  
 // //Dodavanje nove stanice
 function dodajStanicu(){
+    
     id_tacka.readOnly = true
     dodajStanicuButton.hidden = true
     alert('Izaberi poziciju na mapi')
     map.addEventListener('click', function(e){
-        console.log('srdjan')
+        
         const forma = document.querySelector('#forma')
         forma.hidden = false
         let clickedCoordinate = e.coordinate
         id_tacka.value = clickedCoordinate.toString()   
-        console.log(clickedCoordinate)        
+        document.getElementById('id_naziv').focus()        
     })
 }
   
@@ -87,7 +70,7 @@ async function prikaziStanice(url){
         })
     })
     map.addLayer(layer)
-
+}
     //Vectore feature pop-up logic
     const overlayContainerElement = document.querySelector('.overlay-container')
     const overlayLayer = new ol.Overlay({
@@ -111,7 +94,7 @@ async function prikaziStanice(url){
             overlayFeatureAdditionalInfo.innerHTML = opis
         })
     })
-}
+
 
 
 
