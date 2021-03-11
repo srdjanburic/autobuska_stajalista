@@ -4,17 +4,17 @@
     {% load static %}
 
     {% block body %}
+
+    <h2>Izaberi minimalno 3 stanice na mapi</h2>
                 
             <div id="js-map" class="map"></div>
-            <button id="dodaj_stanicu" class="btn btn-primary w-auto mt-3 ">Dodaj stanicu na mapi</button>
-       
-        <div id="forma" hidden="true" >
-            <form  action="" method="post">
-                {% csrf_token %} 
-                {{ form.as_p }}
-                <input type="submit" value="Sacuvaj">
-            </form>
-        </div>
+            <div class="form-group">
+                <label for="naziv_linije">Naziv</label>
+                
+                <input type="text" id="naziv_linije" class="form-control" placeholder="Naziv linije" required>
+                <button id="dodaj_liniju" class="btn btn-primary w-auto mt-3 " >Sacuvaj</button>
+            </div>
+        
         
     
     <div id="popup" class="ol-popup">
@@ -22,6 +22,7 @@
         <div id="popup-content"></div>
     </div>
     <div class="overlay-container">
+        <button class="btn btn-primary" id="chekirajStanicu">Dodaj</button><br>
         <span class="overlay-text" id="feature-name"></span><br>
         <span class="overlay-text" id="feature-additional-info"></span><br>
 
@@ -31,7 +32,8 @@
     <script>
         
       prikaziStanice('{% url "api:stanice" %}')
-      document.getElementById('dodaj_stanicu').onclick = dodajStanicu 
+      document.getElementById('dodaj_liniju').onclick = dodajLiniju
+      uslov()
       
     </script>
 {% endblock %}

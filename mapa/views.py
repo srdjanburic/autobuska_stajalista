@@ -19,16 +19,18 @@ def mapa(request):
             t = form.cleaned_data['tacka']
             Stanica(naziv=n, opis=o, tacka=t).save()
             return redirect('mapa:prikaz_stanica')
-        
-
-        
-
-
+       
 
 def mapa_linija_prikaz(request, pk):
     linija = Linija.objects.get(pk=pk)
     
     return render(request, 'mapa/linija.html', {'linija':linija, 'pk':pk})
+
+def mapa_dodaj_liniju(request):
+   
+    return render(request, 'mapa/dodaj_liniju.html')
+    
+        
     
 
 
