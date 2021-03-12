@@ -8,12 +8,12 @@
     <h2>Izaberi minimalno 3 stanice na mapi</h2>
                 
             <div id="js-map" class="map"></div>
-            <div class="form-group">
-                <label for="naziv_linije">Naziv</label>
-                
-                <input type="text" id="naziv_linije" class="form-control" placeholder="Naziv linije" required>
-                <button id="dodaj_liniju" class="btn btn-primary w-auto mt-3 " >Sacuvaj</button>
-            </div>
+           
+            <form class="form-group" action="{% url 'mapa:dodaj_liniju' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input id="dodaj_liniju" value="Sacuvaj" type="submit" class="btn btn-primary w-auto">
+            </form>
         
         
     
@@ -32,7 +32,7 @@
     <script>
         
       prikaziStanice('{% url "api:stanice" %}')
-      document.getElementById('dodaj_liniju').onclick = dodajLiniju
+    
       uslov()
       
     </script>

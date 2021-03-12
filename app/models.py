@@ -1,6 +1,5 @@
 from django.db import models
 from django.forms import ModelForm
-from django.core.exceptions import ValidationError
 from django.shortcuts import reverse
 
 

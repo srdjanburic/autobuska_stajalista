@@ -2,20 +2,10 @@
 {% load static %}
 
 {% block body %}
-<h1>{{linija.naziv}}</h1>
+<h1>{{linija.naziv}}</h1>        
+        <div id="js-map" class="map"></div> 
+        <a class="btn btn-primary mt-2" href="{% url 'mapa:dodaj_liniju' %}">Dodaj novu liniju</a>
 
-    
-    
-   
-        
-        <div id="js-map" class="map"></div>
-   
-    
- 
-<div id="popup" class="ol-popup">
-    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-    <div id="popup-content"></div>
-</div>
 <div class="overlay-container">
     <span class="overlay-text" id="feature-name"></span><br>
     <span class="overlay-text" id="feature-additional-info"></span><br>

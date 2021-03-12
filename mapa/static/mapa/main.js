@@ -2,6 +2,8 @@ const id_tacka = document.getElementById('id_tacka')
 const dodajStanicuButton = document.getElementById('dodaj_stanicu')
 const dodajLinijuButton = document.getElementById('dodaj_liniju')
 let naziv = document.getElementById('naziv_linije')
+let stanice = document.getElementById('id_stanice')
+
 
 let uslovZaDodavanjeLinije = false
 let chekirajStanicu
@@ -24,32 +26,14 @@ var listaStanica = []
     })
     map.addLayer(openStreetMapStandard)
 
-//dodavanje nove linije
-function dodajLiniju(){
-    if(naziv.value == ''){
-        alert('Unesi naziv linije')
-        
-        
-    }
-    else{
-        let nazivLinije = naziv.value
-        const data = { nazivLinije, listaStanica}
-        const options = {
-            method: 'POST',
-            headers: {
-                "Content-type":"application/json"
-            },
-            body: JSON.stringify(data)
-        }
-        fetch("http://localhost:8000/api/linija/dodaj", options)
-    }
-}
+
 function omogucavanjeCuvanjaLinije(){
     if(listaStanica.length>=3 ){
         dodajLinijuButton.disabled = false
     }else{
         dodajLinijuButton.disabled = true
     }
+    stanice.value = listaStanica.toString()
 }
 function uslov(){
     dodajLinijuButton.disabled=true
@@ -143,9 +127,9 @@ async function prikaziStanice(url){
             if(uslovZaDodavanjeLinije){
                 chekirajStanicu = document.getElementById('chekirajStanicu')
                 overlayContainerElement.style.display = 'block'
-                console.log('dva')
+              
                 if(listaStanica.includes(id)){
-                    console.log('srdjan')
+                   
                     chekirajStanicu.innerHTML = 'X'
                     chekirajStanicu.classList = 'btn btn-danger'
                     

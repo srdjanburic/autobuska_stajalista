@@ -5,9 +5,9 @@ from . import views
 app_name = 'mapa'
 
 urlpatterns = [
-    path('', views.mapa, name='prikaz_stanica'),
+    path('', views.StaniceView.as_view(), name='prikaz_stanica'),
     path('linija/<int:pk>', views.mapa_linija_prikaz, name='prikaz_linije'),
-    path('linija/dodaj', views.mapa_dodaj_liniju, name='dodaj_liniju')
+    path('linija/dodaj', views.mapa_linija_dodaj, name='dodaj_liniju')
    
     
 ]

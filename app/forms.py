@@ -20,5 +20,5 @@ class StanicaModelForm(forms.ModelForm):
         fields = ['naziv', 'opis', 'tacka']
 
     naziv = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class':'form-control'}))
-    opis = forms.CharField(max_length=200, widget=forms.TextInput({'class':'form-control'}))
-    tacka = forms.CharField(max_length=100, widget=forms.TextInput({'class':'form-control'}))
+    opis = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class':'form-control'}))
+    tacka = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))

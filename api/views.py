@@ -19,8 +19,3 @@ def mapa_linija(request, pk):
     data = serializers.serialize('json', stanice)
     return HttpResponse(data, content_type='text/json')
 
-@csrf_exempt
-def mapa_linija_dodaj(request):
-     podaci = json.loads(request.body)
-     print(podaci)
-     return redirect('mapa:prikaz_stanica')
